@@ -1,0 +1,115 @@
+﻿@model AddWebTestMVC.Models.UserViewModel
+@{
+    ViewData["Title"] = "User List";
+}
+
+  <form asp-controller="Home" asp-action="Index" method="get">
+      <p>
+          Search  <input type="text" name="SearchText"/>
+          <input type="submit" value="Search"/>
+      </p>
+      <table class="table">    
+    <tr>    
+        <th>    
+           FirstName
+        </th>    
+        <th>    
+            LastName  
+        </th>    
+        <th>    
+           Email
+        </th> 
+         <th>    
+            Address    
+        </th>
+         <th>    
+            DateOfBirth
+        </th> 
+    </tr>    
+    
+    
+      
+        @foreach (var item in Model.UserList)    
+        {    
+            <tr>    
+                <td>    
+                    @Html.DisplayFor(modelItem => item.FirstName)    
+                </td>    
+                <td>    
+                    @Html.DisplayFor(modelItem => item.LastName)    
+                </td>    
+                <td>    
+                    @Html.DisplayFor(modelItem => item.EmailId)    
+                </td> 
+                 <td>    
+                    @Html.DisplayFor(modelItem => item.Address)    
+                </td> 
+                  <td>    
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)    
+                </td> 
+                
+            </tr>    
+        }    
+        
+    
+</table>
+ <br/>
+<table cellpadding="0" cellspacing="0">
+    <tr>
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            <td>
+                @if (i != Model.CurrentPageIndex)
+                {
+                    <a href="javascript:PagerClick(@i);">@i</a>
+                }
+                else
+                {
+                    <span>@i</span>
+                }
+            </td>
+        }
+    </tr>
+</table>
+<input type="hidden" id="hfCurrentPageIndex" name="currentPageIndex"/>
+
+  </form>
+
+<script type="text/javascript">
+        function PagerClick(index) {
+            document.getElementById("hfCurrentPageIndex").value = index;
+            document.forms[0].submit();
+        }
+</script> 
+<style type="text/css">
+        body
+        {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+ 
+        table
+        {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+ 
+        table th
+        {
+            background-color: #B8DBFD;
+            color: #333;
+            font-weight: bold;
+        }
+ 
+        table th, table td
+        {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+ 
+        table, table table td
+        {
+            border: 0px solid# ccc;
+        }
+    </style>
